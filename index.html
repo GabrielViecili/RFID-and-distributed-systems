@@ -30,8 +30,10 @@
             const subscription = channel.subscription();
 
             subscription.onMessage = (messageEvent) => {
-                console.log(messageEvent.message)
-                showMessage(messageEvent.message.text);
+                const m = messageEvent.message;
+                const row = document.createElement('div');
+                row.innerText = `${m.ts} | ${m.badge_id || ''} | ${m.event_type} | ${m.result} | ${m.reason || ''}`;
+                document.getElementById('messages').prepend(row);
             };
             
             subscription.subscribe();
